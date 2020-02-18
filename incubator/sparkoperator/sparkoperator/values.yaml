@@ -1,7 +1,9 @@
 operatorImageName: gcr.io/spark-operator/spark-operator
-operationVersion: v1beta2-1.0.1-2.4.4
+operatorVersion: v1beta2-1.1.0-2.4.5
 imagePullPolicy: IfNotPresent
 imagePullSecrets: []
+fullnameOverride: "caixabank-spark-operator"
+
 
 rbac:
   create: false
@@ -9,17 +11,18 @@ rbac:
 serviceAccounts:
   spark:
     create: false
-    name: test-user
+    name: spkk8s-tech-user
   sparkoperator:
     create: false
-    name: test-user
+    name: spkk8s-tech-user
 
-sparkJobNamespace: "sparklabo"
+sparkJobNamespace: "cxb-spkk8s-tst"
 installCrds: true
 controllerThreads: 10
 resyncInterval: 30
 ingressUrlFormat: ""
 logLevel: 2
+
 
 securityContext: {}
 
@@ -37,6 +40,7 @@ metricsPrefix: ""
 nodeSelector: {}
 
 podAnnotations: {}
+
 ## Resources for the sparkoperator deployment
 ## Ref: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
 ##
@@ -49,7 +53,7 @@ enableBatchScheduler: true
 ## Whether to enable the ResourceQuota enforcement for SparkApplication resources.
 ## Requires the webhook to be enabled by setting enableWebhook to true.
 ## Ref: https://github.com/GoogleCloudPlatform/spark-on-k8s-operator/blob/master/docs/user-guide.md#enabling-resource-quota-enforcement.
-enableResourceQuotaEnforcement: 
+enableResourceQuotaEnforcement: true
 
 ## Whether to enable leader election when the operator Deployment has more than one replica.
 ## Only applicable when `replicas` is set to a value greater than 1.
